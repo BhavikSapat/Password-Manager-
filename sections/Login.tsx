@@ -24,17 +24,21 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+// import { User } from "lucide-react";
 
-// type User = {
-//   name: string,
-//   email: string,
-//   password:string,
-// }
+type User = {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword?: string;
+};
 
 const Login = () => {
   const [tab, setTab] = useState("signIn");
-  const { register, handleSubmit, reset } = useForm({ shouldUnregister: true });
-  const onSubmit = (data) => {
+  const { register, handleSubmit, reset } = useForm<User>({
+    shouldUnregister: true,
+  });
+  const onSubmit = (data: User) => {
     alert("New user added : " + JSON.stringify(data, null, 2));
     reset();
   };
