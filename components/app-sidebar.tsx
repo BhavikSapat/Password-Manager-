@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/avatar";
 // import Login from "../sections/Login";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export function AppSidebar() {
   const route = useRouter();
@@ -46,15 +47,21 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton>Home</SidebarMenuButton>
+                <Link href="/home">
+                  <SidebarMenuButton>Home</SidebarMenuButton>
+                </Link>
               </SidebarMenuItem>
 
               <SidebarMenuItem>
-                <SidebarMenuButton>Blogs</SidebarMenuButton>
+                <Link href="/cards">
+                  <SidebarMenuButton>Cards</SidebarMenuButton>
+                </Link>
               </SidebarMenuItem>
 
               <SidebarMenuItem>
-                <SidebarMenuButton>Settings</SidebarMenuButton>
+                <Link href="/Setting">
+                  <SidebarMenuButton>Setting</SidebarMenuButton>
+                </Link>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
