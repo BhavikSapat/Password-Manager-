@@ -1,10 +1,10 @@
+"use client";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -12,10 +12,8 @@ import {
 } from "@/components/ui/sidebar";
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -26,8 +24,17 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar";
+// import Login from "../sections/Login";
+import { useRouter } from "next/navigation";
 
 export function AppSidebar() {
+  const route = useRouter();
+  const handleLogOut = () => {
+    const is = confirm("Logged Out");
+    if (is) {
+      route.push("/login");
+    }
+  };
   return (
     <Sidebar className="top-16 h-[calc(100vh-4rem)]">
       <SidebarHeader>
@@ -59,10 +66,7 @@ export function AppSidebar() {
           <CardHeader>
             <div className="flex items-center gap-3">
               <Avatar>
-                <AvatarImage
-                  src="https://github.com/shadcn.png"
-                  alt="@shadcn"
-                />
+                <AvatarImage src="favicon.png" alt="avatar" />
                 <AvatarFallback>CN</AvatarFallback>
                 <AvatarBadge className="bg-green-600 dark:bg-green-800" />
               </Avatar>
@@ -75,7 +79,12 @@ export function AppSidebar() {
           </CardHeader>
 
           <CardContent>
-            <Button variant="destructive" size="sm" className="w-full">
+            <Button
+              variant="destructive"
+              size="sm"
+              className="w-full"
+              onClick={() => handleLogOut()}
+            >
               Log Out
             </Button>
           </CardContent>
