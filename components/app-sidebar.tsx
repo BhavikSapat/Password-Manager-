@@ -27,7 +27,9 @@ import {
 // import Login from "../sections/Login";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
+import Cards from "@/sections/Home";
+import Home from "@/sections/Cards";
+import Setting from "@/sections/Cards";
 export function AppSidebar() {
   const route = useRouter();
   const handleLogOut = () => {
@@ -35,6 +37,12 @@ export function AppSidebar() {
     if (is) {
       route.push("/login");
     }
+  };
+  const handleCards = () => {
+    return <Cards />;
+  };
+  const handleHome = () => {
+    return <Home />;
   };
   return (
     <Sidebar className="top-16 h-[calc(100vh-4rem)]">
@@ -47,21 +55,19 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <Link href="/home">
-                  <SidebarMenuButton>Home</SidebarMenuButton>
-                </Link>
+                <SidebarMenuButton onClick={() => handleHome}>
+                  Home
+                </SidebarMenuButton>
               </SidebarMenuItem>
 
               <SidebarMenuItem>
-                <Link href="/cards">
-                  <SidebarMenuButton>Cards</SidebarMenuButton>
-                </Link>
+                <SidebarMenuButton onClick={() => handleCards}>
+                  Cards
+                </SidebarMenuButton>
               </SidebarMenuItem>
 
               <SidebarMenuItem>
-                <Link href="/Setting">
-                  <SidebarMenuButton>Setting</SidebarMenuButton>
-                </Link>
+                <SidebarMenuButton>Setting</SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
