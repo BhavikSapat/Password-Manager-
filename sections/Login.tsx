@@ -1,9 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Field,
-  FieldDescription,
   FieldGroup,
   FieldLabel,
   FieldLegend,
@@ -11,21 +9,11 @@ import {
   FieldSet,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-// import { User } from "lucide-react";
-
+import { useRouter } from "next/navigation";
 type User = {
   name: string;
   email: string;
@@ -34,13 +22,15 @@ type User = {
 };
 
 const Login = () => {
+  const router = useRouter();
   const [tab, setTab] = useState("signIn");
   const { register, handleSubmit, reset } = useForm<User>({
     shouldUnregister: true,
   });
   const onSubmit = (data: User) => {
     alert("New user added : " + JSON.stringify(data, null, 2));
-    reset();
+    // reset();
+    router.push("/dashboard");
   };
   return (
     <section className="min-h-screen bg-zinc-950 flex items-center justify-center px-5">

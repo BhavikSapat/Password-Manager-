@@ -32,26 +32,8 @@ const Page = () => {
         </Button>
       </div>
 
-      {/* <nav className="flex text-sm lg:text-lg h-full items-center">
-        <ul className="flex items-center h-5">
-          {list.map((id, index) => (
-            <React.Fragment key={index}>
-              <li className="px-2 lg:px-5">
-                <Link href={id.link}>{id.name}</Link>
-              </li>
-              {index < list.length - 1 && (
-                <Separator
-                  orientation="vertical"
-                  className="h-6 bg-muted-foreground/50"
-                />
-              )}
-            </React.Fragment>
-          ))}
-        </ul>
-      </nav> */}
-
-      <div className="flex text-sm lg:text-lg h-full items-center">
-        {loggedIn ? <h1>Welcome Back!</h1> : <h1>Hello !</h1>}
+      <div className="flex text-lg font-bold lg:text-lg h-full items-center">
+        <h1>PASSWORD MANAGER</h1>
       </div>
 
       <div className="flex items-center">

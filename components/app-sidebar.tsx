@@ -24,25 +24,16 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar";
-// import Login from "../sections/Login";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Cards from "@/sections/Home";
-import Home from "@/sections/Cards";
-import Setting from "@/sections/Cards";
+import { useState } from "react";
 export function AppSidebar() {
   const route = useRouter();
   const handleLogOut = () => {
     const is = confirm("Logged Out");
     if (is) {
-      route.push("/login");
+      route.push("/");
     }
-  };
-  const handleCards = () => {
-    return <Cards />;
-  };
-  const handleHome = () => {
-    return <Home />;
   };
   return (
     <Sidebar className="top-16 h-[calc(100vh-4rem)]">
@@ -55,19 +46,21 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton onClick={() => handleHome}>
-                  Home
-                </SidebarMenuButton>
+                <Link href="/dashboard">
+                  <SidebarMenuButton>Home</SidebarMenuButton>
+                </Link>
               </SidebarMenuItem>
 
               <SidebarMenuItem>
-                <SidebarMenuButton onClick={() => handleCards}>
-                  Cards
-                </SidebarMenuButton>
+                <Link href="/dashboard/cards">
+                  <SidebarMenuButton>Cards</SidebarMenuButton>
+                </Link>
               </SidebarMenuItem>
 
               <SidebarMenuItem>
-                <SidebarMenuButton>Setting</SidebarMenuButton>
+                <Link href="/dashboard/setting">
+                  <SidebarMenuButton>Setting</SidebarMenuButton>
+                </Link>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>

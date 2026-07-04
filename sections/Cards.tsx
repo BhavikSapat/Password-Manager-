@@ -1,95 +1,99 @@
 "use client";
 
-import * as React from "react";
-
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Eye, Pencil, Trash2, Globe, Plus } from "lucide-react";
+import { useState } from "react";
+import { pass_data } from ".././app/data";
 
-const spacingOptions = [
-  {
-    className: "[--card-spacing:--spacing(4)]",
-    label: "16px",
-    value: "4",
-  },
-  {
-    className: "[--card-spacing:--spacing(5)]",
-    label: "20px",
-    value: "5",
-  },
-  {
-    className: "[--card-spacing:--spacing(6)]",
-    label: "24px",
-    value: "6",
-  },
-  {
-    className: "[--card-spacing:--spacing(8)]",
-    label: "32px",
-    value: "8",
-  },
-];
-
-const Cards = () => {
-  const [spacing, setSpacing] = React.useState("4");
-  const selectedSpacing = spacingOptions.find(
-    (option) => option.value === spacing,
-  );
-
+export default function Cards() {
+  const [show, setShow] = useState<number | null>(null);
   return (
-    <div className="mx-auto grid w-full max-w-sm gap-4">
-      <Card className={selectedSpacing?.className}>
-        <CardHeader>
-          <CardTitle>G Mail</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form>
-            <div className="flex flex-col gap-6">
-              <div className="grid gap-2">
-                <Label htmlFor="email-spacing">Email</Label>
-                <Input
-                  id="email-spacing"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                />
-              </div>
-              <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password-spacing">Password</Label>
-                  <a
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    Forgot your password?
-                  </a>
+    <>
+      <div className="px-4">
+        <div className="flex">
+          <div className="head  text-xl text-left py-5 font-bold uppercase">
+            <h1>Password Cards</h1>
+          </div>
+          <div className="my-auto ml-auto px-5">
+            <Button variant={"secondary"} className="px-5 py-2">
+              Search
+              <Plus className="h-5 w-5 text-primary" />
+            </Button>
+            <Button variant={"secondary"} className="px-5 py-2">
+              Add
+              <Plus className="h-5 w-5 text-primary" />
+            </Button>
+          </div>
+        </div>
+        <div className="grid grid-cols-4 gap-7  ">
+          {pass_data.map((item, index) => (
+            <Card
+              key={index}
+              className="group rounded-2xl border bg-card shadow-sm transition-all hover:shadow-md "
+            >
+              <CardContent className="p-4">
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
+                      <Globe className="h-5 w-5 text-primary" />
+                    </div>
+
+                    <div>
+                      <h3 className="text-lg font-semibold">{item.title}</h3>
+                      <p className="text-sm text-muted-foreground">
+                        {new URL(item.link).hostname}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setShow(show === index ? null : index)}
+                    >
+                      <Eye className="h-4 w-4" />
+                    </Button>
+
+                    <Button variant="ghost" size="icon">
+                      <Pencil className="h-4 w-4" />
+                    </Button>
+
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="text-destructive hover:text-destructive"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
-                <Input id="password-spacing" type="password" required />
-              </div>
-            </div>
-          </form>
-        </CardContent>
-        <CardFooter className="flex-col gap-2">
-          <Button type="submit" className="w-full">
-            Login
-          </Button>
-          <Button variant="outline" className="w-full">
-            Login with Google
-          </Button>
-        </CardFooter>
-      </Card>
-    </div>
+
+                <div className="mt-6 space-y-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-wider text-muted-foreground">
+                      Email
+                    </p>
+                    <p className="mt-1 font-medium">{item.email}</p>
+                  </div>
+
+                  <div>
+                    <p className="text-xs uppercase tracking-wider text-muted-foreground">
+                      Password
+                    </p>
+                    <p className="mt-1 font-mono tracking-widest">
+                      {show === index
+                        ? item.pass
+                        : "•".repeat(item.pass.length)}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </>
   );
-};
-export default Cards;
+}
